@@ -1,5 +1,0 @@
-wah\web\pojo\Category.class
-wah\web\service\impl\CategoryServiceImpl.class
-wah\web\mapper\CategoryMapper.class
-wah\web\controller\CategoryController.class
-wah\web\service\CategoryService.class
