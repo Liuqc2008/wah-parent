@@ -20,6 +20,7 @@ public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 
+	//http://localhost/web/listCategory
 	@RequestMapping("listCategory")
 	public ModelAndView listCategory(Page page){
 		ModelAndView mav = new ModelAndView();
