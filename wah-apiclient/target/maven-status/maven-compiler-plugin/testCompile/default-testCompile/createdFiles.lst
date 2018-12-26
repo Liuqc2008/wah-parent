@@ -1,0 +1,9 @@
+wah\apiclient\pay\test\AliPagePayTest.class
+wah\weixinapi\test\AipTest.class
+wah\weixinapi\test\RedPackageApiTest.class
+wah\weixinapi\test\PayTest.class
+wah\weixinapi\test\MenuTest.class
+wah\apiclient\AppTest.class
+wah\weixinapi\test\PropertiesUpdateTest.class
+wah\apiclient\aliyun\message\test\AipTest.class
+wah\weixinapi\test\TemplateMessageTest.class
