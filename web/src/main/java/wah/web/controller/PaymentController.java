@@ -16,101 +16,101 @@ import wah.web.service.PaymentService;
 
 import wah.infrastructure.web.WebUtil;
 
-
 @Controller
 @RequestMapping("Payment")
-public class PaymentController extends BaseController{
+public class PaymentController extends BaseController {
 	@Autowired
 	PaymentService paymentService;
-	
+
 	/*
 	 * 支付宝网页支付
-	 * */
-	@RequestMapping(value="AliPagePayIndex")
-	public String AliPagePayIndex() throws Exception{
+	 */
+	@RequestMapping(value = "AliPagePayIndex")
+	public String AliPagePayIndex() throws Exception {
 
-		return "jsp/Payment/AliPagePayIndex";
+		return "Payment/AliPagePayIndex";
 	}
-	
+
 	/*
 	 * 跳转支付
-	 * */
-	@RequestMapping(value="AliPagePay",  method=RequestMethod.POST)
-	public String AliPagePay(String out_trade_no, String total_amount, String subject, String body, Model model) throws Exception{
-		HashMap<String,String> param =new HashMap<String,String>();
+	 */
+	@RequestMapping(value = "AliPagePay", method = RequestMethod.POST)
+	public String AliPagePay(String out_trade_no, String total_amount, String subject, String body, Model model)
+			throws Exception {
+		HashMap<String, String> param = new HashMap<String, String>();
 		param.put("out_trade_no", out_trade_no);
 		param.put("total_amount", total_amount);
 		param.put("subject", subject);
 		param.put("body", body);
-		
-		model.addAttribute("form",  paymentService.aliPagePay(param));  
-		return "jsp/Payment/AliPagePay";
+
+		model.addAttribute("form", paymentService.aliPagePay(param));
+		return "Payment/AliPagePay";
 	}
-	
+
 	/*
 	 * 订单查询
-	 * */
-	@RequestMapping(value="AliPagePayQuery",  method=RequestMethod.POST)
-	public String AliPagePayQuery(Model model, HttpServletRequest request) throws Exception{
-		Map<String,String> param = WebUtil.GetParameterMap(request.getParameterMap());
-		
-		model.addAttribute("param1",  paymentService.aliPagePayQuery(param));
-		return "jsp/Payment/AliPagePayQuery";
+	 */
+	@RequestMapping(value = "AliPagePayQuery", method = RequestMethod.POST)
+	public String AliPagePayQuery(Model model, HttpServletRequest request) throws Exception {
+		Map<String, String> param = WebUtil.GetParameterMap(request.getParameterMap());
+
+		model.addAttribute("param1", paymentService.aliPagePayQuery(param));
+		return "Payment/AliPagePayQuery";
 	}
-	
+
 	/*
 	 * 支付成功回调
-	 * */
-	@RequestMapping(value="AliPagePayReturn")
-	public String AliPageReturn(Model model, HttpServletRequest request) throws Exception{
-		Map<String,String> param = WebUtil.GetParameterMap(request.getParameterMap());
-		
-		model.addAttribute("param",  paymentService.aliPagePayReturn(param));
-		return "jsp/Payment/AliPagePayReturn";
+	 */
+	@RequestMapping(value = "AliPagePayReturn")
+	public String AliPageReturn(Model model, HttpServletRequest request) throws Exception {
+		Map<String, String> param = WebUtil.GetParameterMap(request.getParameterMap());
+
+		model.addAttribute("param", paymentService.aliPagePayReturn(param));
+		return "Payment/AliPagePayReturn";
 	}
-	
+
 	/*
 	 * 异步通知
-	 * */
-	@RequestMapping(value="AliPagePayNotify")
+	 */
+	@RequestMapping(value = "AliPagePayNotify")
 	@ResponseBody
-	public void AliPagePayNotify(HttpServletRequest request) throws Exception{
-		Map<String,String> param = WebUtil.GetParameterMap(request.getParameterMap());
+	public void AliPagePayNotify(HttpServletRequest request) throws Exception {
+		Map<String, String> param = WebUtil.GetParameterMap(request.getParameterMap());
 		String result = paymentService.aliPagePayReturn(param);
-		
+
 		System.out.println("异步通知：" + result);
 	}
-	
+
 	/*
 	 * 退款
-	 * */
-	@RequestMapping(value="AliPagePayRefund")
+	 */
+	@RequestMapping(value = "AliPagePayRefund")
 	@ResponseBody
-	public void AliPagePayRefund(HttpServletRequest request) throws Exception{
-		Map<String,String> param = WebUtil.GetParameterMap(request.getParameterMap());
-		
+	public void AliPagePayRefund(HttpServletRequest request) throws Exception {
+		Map<String, String> param = WebUtil.GetParameterMap(request.getParameterMap());
+
 		paymentService.aliPagePayRefund(param);
 	}
-	
+
 	/*
 	 * 退款查询
-	 * */
-	@RequestMapping(value="AliPagePayRefundQuery")
-	public String AliPagePayRefundQuery(HttpServletRequest request, Model model) throws Exception{
-		Map<String,String> param = WebUtil.GetParameterMap(request.getParameterMap());
-		
+	 */
+	@RequestMapping(value = "AliPagePayRefundQuery")
+	public String AliPagePayRefundQuery(HttpServletRequest request, Model model) throws Exception {
+		Map<String, String> param = WebUtil.GetParameterMap(request.getParameterMap());
+
 		model.addAttribute("param1", paymentService.aliPagePayRefundQuery(param));
-		return "jsp/Payment/AliPagePayRefundQuery";
+		return "Payment/AliPagePayRefundQuery";
 	}
-	
+
 	/*
 	 * 关闭订单接口
-	 * */
-	@RequestMapping(value="AliPagePayClose",  method=RequestMethod.POST)
-	public String AliPagePayClose(Model model, HttpServletRequest request) throws Exception{
-		Map<String,String> param = WebUtil.GetParameterMap(request.getParameterMap());
-		
-		model.addAttribute("param1",  paymentService.aliPagePayClose(param));
-		return "jsp/Payment/AliPagePayClose";
+	 */
+	@RequestMapping(value = "AliPagePayClose", method = RequestMethod.POST)
+	public String AliPagePayClose(Model model, HttpServletRequest request) throws Exception {
+		Map<String, String> param = WebUtil.GetParameterMap(request.getParameterMap());
+
+		model.addAttribute("param1", paymentService.aliPagePayClose(param));
+		return "Payment/AliPagePayClose";
 	}
 }

@@ -20,7 +20,7 @@ public class AliyunController {
 	@RequestMapping(value="SendMessage")
 	public String AccountList() throws Exception{
 		
-		return "jsp/Aliyun/SendMessage";
+		return "Aliyun/SendMessage";
 	}
 	
 	@RequestMapping(value="doSendMessage", method= RequestMethod.POST)
