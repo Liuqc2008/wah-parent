@@ -41,7 +41,7 @@
 		<property name="typeAliasesPackage" value="wah.web.pojo" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations"
-			value="classpath:wah/web/mapper/*.xml" />
+			value="classpath:mapper/*.xml" />
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageInterceptor">
