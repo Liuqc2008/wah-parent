@@ -25,10 +25,8 @@
 	<mvc:default-servlet-handler />
 	<mvc:resources mapping="/Resource/**" location="/WEB-INF/Resource/" />
 
-	<context:component-scan
-		base-package="wah.web.controller">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+	<context:component-scan base-package="wah.web.controller">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
 

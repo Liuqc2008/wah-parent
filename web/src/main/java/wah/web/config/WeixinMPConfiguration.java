@@ -22,13 +22,18 @@ public class WeixinMPConfiguration {
 	@Value("#{wxProperties.aesKey}")
 	private String aesKey;
 	
+	public WeixinMPConfiguration() {
+		System.out.println("WeixinMPConfiguration容器启动初始化。。。");
+	}
+	
 	@Bean
 	public WxMpConfigStorage wxMpConfigStorage() {
+		//需先安装lombok工具        https://blog.csdn.net/icecoola_/article/details/77414572 
 		WxMpInMemoryConfigStorage configStorage = new WxMpInMemoryConfigStorage();
-		//configStorage.setAppId(this.appId);
-		//configStorage.setSecret(this.appSecret);
-		//configStorage.setToken(this.token);
-		//configStorage.setAesKey(this.aesKey);
+		configStorage.setAppId(this.appId);
+		configStorage.setSecret(this.appSecret);
+		configStorage.setToken(this.token);
+		configStorage.setAesKey(this.aesKey);
 		return configStorage;
 	}
 
