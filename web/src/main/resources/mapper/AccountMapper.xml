@@ -37,6 +37,7 @@
 				and role.name = #{rolename}
 			</if>
 		</where>
+		
 		<if test="page !=null and page !='' ">
 			limit ${(page -1) * limit}, ${limit}
 		</if>
