@@ -17,11 +17,11 @@ public class AccountController extends BaseController {
 	@Autowired
 	AccountService accountService;
 
-	// http://localhost/MavenSSM/Account/AccountList
+	// http://localhost/web/Account/AccountList
 	@RequestMapping(value = "AccountList")
 	public String AccountList() throws Exception {
 
-		return "Account/AccountList";
+		return "jsp/Account/AccountList";
 	}
 
 	@RequestMapping(value = "AccountDetail")
@@ -29,7 +29,7 @@ public class AccountController extends BaseController {
 		Account account = id == 0 ? new Account() : accountService.get(id);
 
 		model.addAttribute("account", account);
-		return "Account/AccountDetail";
+		return "jsp/Account/AccountDetail";
 	}
 
 	@RequestMapping(value = "Add", method = RequestMethod.POST)

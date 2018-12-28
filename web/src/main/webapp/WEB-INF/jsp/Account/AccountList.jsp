@@ -21,11 +21,11 @@
 <body>
 	<div style="height:20px;"></div>
 	<div class="demoTable">
-  		名称：
+  		用户名：
 	  	<div class="layui-inline">
 	    	<input class="layui-input" name="name" id="name" autocomplete="off">
 	  	</div>
-	  	备注：
+	  	密码：
 	  	<div class="layui-inline">
 	    	<input class="layui-input" name="password" id="password" autocomplete="off">
 	  	</div>
@@ -74,15 +74,15 @@
 	  
   		table.render({
 	    	elem: '#test',
-	    	url:'/web/Common/RoleList',
+	    	url:'/web/Common/AccountList',
 	    	cols: [[
 				//{type: 'numbers' },
 				{checkbox: true, fixed: 'left'},
                 {field:'right', title: '操作', width: 130, toolbar: "#barDemo", align: 'center' },
 	      		{field:'id', width:80, title: 'Id', align: 'center', sort: true},
-	      		{field:'name', width:130, align: 'center', title: '名称'},
-	      		{field:'desc', width:130, align: 'center', title: '备注'},
-	      		{field:'createDate', width:180, align: 'center', title: '新增时间'},
+	      		{field:'name', width:130, align: 'center', title: '用户名'},
+	      		{field:'password', width:130, align: 'center', title: '密码'},
+	      		{field:'createDate', width:180, align: 'center', title: '时间'},
 	    	]],
 	    	id: 'testReload',
 	    	page: true,
@@ -96,7 +96,7 @@
                 layer.msg('ID：' + data.id + ' 的查看操作');
             } else if (obj.event === 'del') {
                 layer.confirm('确定删除该行？', function (index) {
-                    $.Ajax("/web/Role/Delete?id=" + data.id, {}, function (result) {
+                    $.Ajax("/web/Account/Delete?id=" + data.id, {}, function (result) {
                         layer.alert("删除成功！");
                         Reload();
                         layer.close(index);
@@ -104,7 +104,7 @@
 
                 });
             } else if (obj.event === 'edit') {
-            	OpenFrame("修改角色信息", "/web/Role/RoleDetail?id=" + data.id, 460, 250, '', Reload);
+            	OpenFrame("修改用户信息", "/web/Account/AccountDetail?id=" + data.id, 460, 250, '', Reload);
             }
         });
         
@@ -124,7 +124,7 @@
 			   	layer.msg(checkStatus.isAll ? '全选': '未全选')
 			},
 			Add: function () {
-	         	OpenFrame("新增角色", "/web/Role/RoleDetail", 460, 250, '', Reload);
+	         	OpenFrame("新增用户", "/web/Account/AccountDetail", 460, 250, '', Reload);
 	        },	
   			reload: function(){
  			 	table.reload('testReload', {

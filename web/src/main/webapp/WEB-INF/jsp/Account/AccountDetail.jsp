@@ -15,7 +15,7 @@
   	
   	<script type="text/javascript" src="/web/Resource/Script/jquery-3.3.1.min.js"></script>
   	<script type="text/javascript" src="/web/Resource/Script/extend.js"></script>
-  	<script type="text/javascript" src="/web/Resource/Script/Ajax.js"></script>
+  	<script type="text/javascript" src="/web/Resource/Script/Ajax.js?v1"></script>
   	
   	<script type="text/javascript" src="/web/Resource/Script/layui/layui.js"></script>
   	<!--  
@@ -25,15 +25,15 @@
 <body>
 	<div class="layui-form">
 		<div class="layui-form-item ">
-	        <label class="layui-form-label">名称：</label>
+	        <label class="layui-form-label">用户名：</label>
 	        <div class="layui-input-inline">
-	            <input type="text" id="Name" Value="${role.name}" lay-verify="required" lay-verType="tips" autocomplete="off" class="layui-input">
+	            <input type="text" id="Name" Value="${account.name}" lay-verify="required|length" param="1,3" lay-verType="tips" autocomplete="off" class="layui-input">
 	        </div>
 	    </div>
 	    <div class="layui-form-item ">
-	        <label class="layui-form-label">备注：</label>
+	        <label class="layui-form-label">密码：</label>
 	        <div class="layui-input-inline">
-	            <input type="text" id="Desc" Value="${role.desc}" autocomplete="off" class="layui-input">
+	            <input type="text" id="Password" Value="${account.password}" lay-verify="required" lay-verType="tips" autocomplete="off" class="layui-input">
 	        </div>
 	    </div>
 	    <div class="layui-form-item">
@@ -44,24 +44,25 @@
 	    </div>
     </div>
 	<script>
-		var id = ${role.id == null ? 0 : role.id};
+		var id = ${account.id == null ? 0 : account.id};
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		
 		var layer;
 		layui.use(['form', 'layedit'], function(){
 			var form = layui.form,
-			 layedit = layui.layedit,
-			 layer = layui.layer;
+		 	layedit = layui.layedit,
+			layer = layui.layer;
 			
 			//监听提交
 	        form.on('submit(Submit)', function (data) {
 	        	var params = {
                     Id: id,
                     Name: $("#Name").val(),
-                    Desc: $("#Desc").val(),
+                    Password: $("#Password").val(),
                 };
+	       		//alert(JSON.stringify(params));
 	        	
-	        	var url = id == 0 ? "/web/Role/Add" :"/web/Role/Update";
+	        	var url = id == 0 ? "/web/Account/Add" :"/web/Account/Update";
 	        	$.Ajax(url, params, function (result) {
 	                layer.alert("保存成功！");
 	                parent.layer.close(index);

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wah.web.mapper.AccountMapper">
+	<resultMap id="AccountBean" type="Account">    
+    	<id column="id" property="id"/>    
+    	<result column="name" property="name"/>    
+    	<result column="password" property="password"/>    
+    	<result column="createDate" property="createDate"/>    
+    	<collection property="roles" ofType="wah.web.pojo.Role">
+          	<id column="roleid" property="id" />
+            <result column="rolename" property="name" />
+            <result column="roledesc" property="desc" />
+            <result column="rolecreateDate" property="createDate" />
+       	</collection>
+	</resultMap>  
+	
+	<select id="getById" parameterType="_int" resultMap="AccountBean">
+  		 select account.*, 
+  				role.id as roleid, 
+  				role.name as rolename, 
+  				role.desc as roledesc, 
+  				role.createDate as rolecreateDate  
+  		   from account 
+	  left join role on role.id in(select roleid from accountrole where accountid = account.id)
+		  where account.id = #{id}    	
+	</select>
+	
+	<select id="list" parameterType="Map" resultType="Account">
+	   	select id, name, password, createDate
+	   		from account
+	   	<where>
+	   		<if test="name !=null and name !='' ">
+				and name like CONCAT('%',#{name},'%') 
+			</if>
+        	<if test="password !=null and password !='' ">
+            	and password = #{password}
+        	</if>  	
+        	<if test="startTime !=null and startTime !='' ">
+            	and createDate <![CDATA[ >= ]]> #{startTime}
+        	</if>
+        	<if test="endTime !=null and endTime !='' ">
+            	and createDate <![CDATA[ <= ]]> #{endTime}
+        	</if>
+        </where>
+        <if test="page !=null and page !='' ">
+        	limit ${(page -1) * limit}, ${limit}
+        </if>
+	</select>
+	
+	<select id="count" parameterType="Map" resultType="java.lang.Integer">
+	   	select count(id) from account
+	   	<where>
+	   		<if test="name !=null and name !='' ">
+				and name like CONCAT('%',#{name},'%') 
+			</if>
+        	<if test="password !=null and password !='' ">
+            	and password = #{password}
+        	</if>  	
+        	<if test="startTime !=null and startTime !='' ">
+            	and createDate <![CDATA[ >= ]]> #{startTime}
+        	</if>
+        	<if test="endTime !=null and endTime !='' ">
+            	and createDate <![CDATA[ <= ]]> #{endTime}
+        	</if>
+        </where>
+	</select>
+	
+  	<select id="get" parameterType="_int" resultType="Account">
+	   	select * from account where id= #{id}    		
+	</select>
+	
+	<insert id="add" keyColumn="id" keyProperty="id" parameterType="wah.web.pojo.Account" useGeneratedKeys="true">
+    	insert into account(name, password, createDate)
+    	values(#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  	</insert>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+    	delete from account where id = #{id,jdbcType=INTEGER}
+  	</delete>
+	
+	<update id="update" parameterType="wah.web.pojo.Account">
+		update account
+		<set>
+			<if test="name != null">
+        		name = #{name, jdbcType=VARCHAR},
+      		</if>
+      		<if test="password != null">
+        		password = #{password, jdbcType=VARCHAR},
+      		</if>
+			<if test="createDate != null">
+        		createDate = #{createDate, jdbcType=TIMESTAMP},
+      		</if>
+      	</set>
+		where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

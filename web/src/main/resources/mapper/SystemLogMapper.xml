@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wah.web.mapper.SystemLogMapper">
+ 
+	<insert id="add" keyColumn="id" keyProperty="id" parameterType="wah.web.pojo.SystemLog" useGeneratedKeys="true">
+    	insert into systemlog(`name`, `detail`)
+    	values(#{name, jdbcType=VARCHAR}, #{detail, jdbcType=VARCHAR})
+  	</insert>
+
+  	
+  	<delete id="delete" parameterType="java.lang.Integer">
+    	delete from systemlog where id = #{id, jdbcType=INTEGER}
+  	</delete>
+</mapper>

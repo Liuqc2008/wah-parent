@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wah.web.mapper.RoleMapper">
+ 
+ 	<select id="list" parameterType="Map" resultType="Role">
+	   	select id, `name`, `desc`, createDate
+	   		from role
+	   	<where>
+	   		<if test="name !=null and name !='' ">
+				and name like CONCAT('%',#{name},'%') 
+			</if>
+        	<if test="desc !=null and desc !='' ">
+            	and password = #{password}
+        	</if>  	
+        	<if test="startTime !=null and startTime !='' ">
+            	and createDate <![CDATA[ >= ]]> #{startTime}
+        	</if>
+        	<if test="endTime !=null and endTime !='' ">
+            	and createDate <![CDATA[ <= ]]> #{endTime}
+        	</if>
+        </where>
+        <if test="page !=null and page !='' ">
+        	limit ${(page -1) * limit}, ${limit}
+        </if>
+	</select>
+	
+	<select id="count" parameterType="Map" resultType="java.lang.Integer">
+	   	select count(id) from role
+	   	<where>
+	   		<if test="name !=null and name !='' ">
+				and name like CONCAT('%',#{name},'%') 
+			</if>
+        	<if test="desc !=null and desc !='' ">
+            	and password = #{password}
+        	</if>  	
+        	<if test="startTime !=null and startTime !='' ">
+            	and createDate <![CDATA[ >= ]]> #{startTime}
+        	</if>
+        	<if test="endTime !=null and endTime !='' ">
+            	and createDate <![CDATA[ <= ]]> #{endTime}
+        	</if>
+        </where>
+	</select>
+	
+	<select id="getById" parameterType="_int" resultType="Role">
+	   	select * from role where id= #{id} limit 1    		
+	</select>
+	
+	<insert id="add" keyColumn="id" keyProperty="id" parameterType="wah.web.pojo.Role" useGeneratedKeys="true">
+    	insert into role(`name`, `desc`)
+    	values(#{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR})
+  	</insert>
+	
+	<update id="update" parameterType="wah.web.pojo.Role">
+		update role
+		<set>
+			<if test="name != null and name !='' ">
+        		`name` = #{name, jdbcType=VARCHAR},
+      		</if>
+      		<if test="desc != null">
+        		`desc` = #{desc, jdbcType=VARCHAR},
+      		</if>
+      	</set>
+		where id = #{id,jdbcType=INTEGER}
+  	</update>
+  	
+  	<delete id="delete" parameterType="java.lang.Integer">
+    	delete from role where id = #{id, jdbcType=INTEGER}
+  	</delete>
+</mapper>

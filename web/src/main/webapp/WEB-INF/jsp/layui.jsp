@@ -23,7 +23,7 @@
 	  
   		table.render({
 	    	elem: '#test',
-	    	url:'/MavenSSM/Common/CategoryList',
+	    	url:'/web/Common/CategoryList',
 	    	cols: [[
 	      		{field:'id', width:80, title: 'ID', sort: true},
 	      		{field:'name', width:130, title: '用户名'}
