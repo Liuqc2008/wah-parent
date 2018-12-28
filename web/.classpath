@@ -26,5 +26,6 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/wah-apiclient"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/wah-infrastructure"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -23,6 +23,12 @@ public class AccountController extends BaseController {
 
 		return "jsp/Account/AccountList";
 	}
+	
+	@RequestMapping(value = "AccountRoleList")
+	public String AccountRoleList() throws Exception {
+
+		return "jsp/Account/AccountRoleList";
+	}
 
 	@RequestMapping(value = "AccountDetail")
 	public String AccountDetail(@RequestParam(defaultValue = "0") int id, Model model) {

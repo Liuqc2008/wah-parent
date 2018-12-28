@@ -18,6 +18,10 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	AccountMapper accountMapper;
 
+	public List<Map<String, Object>> GetAccountRole(Map<String, Object> map){
+		return accountMapper.GetAccountRole(map);
+	}
+	
 	public List<Account> list(Map<String, Object> map) {
 		return accountMapper.list(map);
 	}

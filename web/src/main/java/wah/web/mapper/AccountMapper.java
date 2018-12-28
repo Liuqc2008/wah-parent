@@ -6,6 +6,9 @@ import java.util.Map;
 import wah.web.pojo.Account;
 
 public interface AccountMapper {
+	
+	public List<Map<String,Object>> GetAccountRole(Map<String, Object> map);
+	
 	public List<Account> list(Map<String, Object> map);
 
 	public int count(Map<String, Object> map);

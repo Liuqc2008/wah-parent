@@ -1,6 +1,7 @@
 package wah.web.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,9 @@ public class CategoryServiceImpl  implements CategoryService{
 	
 	public List<Category> list(){
 		return categoryMapper.list();
+	}
+	
+	public List<Map<String, Object>> GetList(){
+		return categoryMapper.GetList();
 	}
 }

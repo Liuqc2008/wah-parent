@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import wah.web.pojo.Category;
 import wah.web.service.AccountService;
 import wah.web.service.CategoryService;
 import wah.web.service.RoleService;
@@ -36,12 +35,26 @@ public class CommonController {
 	@RequestMapping("/CategoryList")
 	@ResponseBody
 	public Object peopleSelect() {
+		return categoryService.GetList();
+	}
+	
+	@RequestMapping("/AccountRoleList")
+	@ResponseBody
+	public Object AccountRoleList(@RequestParam(defaultValue = "0") int page, 
+								  @RequestParam(defaultValue = "0") int limit,
+						  		  HttpServletRequest request) throws Exception {
+		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
 		PageData pageData = new PageData();
-		List<Category> cs = categoryService.list();
 
-		pageData.setData(cs);
-		pageData.setCount(cs.size());
+		Map<String, Object> requestParam = urlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
+		pageData.setData(accountService.GetAccountRole(requestParam));
+		
+		requestParam.put("count", true);
+		requestParam.remove("page");
+		Map<String, Object> listCount =  accountService.GetAccountRole(requestParam).get(0);
+		pageData.setCount(Integer.parseInt(listCount.get("totalNum").toString()));
+		
 		return pageData;
 	}
 
