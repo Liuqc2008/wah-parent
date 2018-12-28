@@ -3,6 +3,8 @@
 	<name>web</name>
 	<comment></comment>
 	<projects>
+		<project>wah-infrastructure</project>
+		<project>wah-apiclient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

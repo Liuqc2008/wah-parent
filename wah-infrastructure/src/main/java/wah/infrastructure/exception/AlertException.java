@@ -2,6 +2,7 @@ package wah.infrastructure.exception;
 
 
 public class AlertException extends Exception{
+	
 	/**
 	 * 
 	 */
