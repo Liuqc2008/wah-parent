@@ -12,6 +12,9 @@
         <dependent-module archiveName="wah-apiclient-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/wah-apiclient/wah-apiclient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="weixin-java-mp-3.3.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/weixin-java-mp/weixin-java-mp">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="web"/>
         <property name="java-output-path" value="/web/target/classes"/>
     </wb-module>

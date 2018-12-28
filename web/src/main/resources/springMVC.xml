@@ -25,4 +25,7 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    
+    <!-- 默认首页 -->
+    <mvc:view-controller path="/" view-name="index"/>
 </beans>
