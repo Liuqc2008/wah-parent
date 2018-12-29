@@ -10,8 +10,8 @@ import java.util.Properties;
 
 import com.alibaba.fastjson.JSONObject;
 
-import wah.infrastructure.extend.ObjectExtension;
-import wah.infrastructure.extend.StringExtensions;
+import wah.infrastructure.extend.ObjectExtend;
+import wah.infrastructure.extend.StringExtend;
 import wah.apiclient.sdk.util.*;
 
 public class Config {
@@ -50,7 +50,7 @@ public class Config {
 	public static String AccessToken() throws Exception{
 		Date now = new Date();
 		String as = prop.getProperty("AccessTokenCreateTime");
-		Date accessTokenCreateTime = ObjectExtension.StringToDate(as, "yyyy-MM-dd HH:mm:ss");
+		Date accessTokenCreateTime = ObjectExtend.StringToDate(as, "yyyy-MM-dd HH:mm:ss");
 		
 		if( (((now.getTime() - accessTokenCreateTime.getTime()) ) / ( 60*1000 )) > 160){
 			/*
@@ -64,7 +64,7 @@ public class Config {
 			
 			JSONObject jsonObject = JSONObject.parseObject(accessToken);
 			Config.SetProperties("AccessToken", jsonObject.getString("access_token"));
-			Config.SetProperties("AccessTokenCreateTime", StringExtensions.DateFormat((new Date()), "yyyy-MM-dd HH:mm:ss"));
+			Config.SetProperties("AccessTokenCreateTime", StringExtend.DateFormat((new Date()), "yyyy-MM-dd HH:mm:ss"));
 		}
 		
 		return prop.getProperty("AccessToken");

@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ObjectExtension extends Object{
+public class ObjectExtend extends Object{
 	
 	/*
 	 * formate "yyyy-MM-dd HH:mm:ss"

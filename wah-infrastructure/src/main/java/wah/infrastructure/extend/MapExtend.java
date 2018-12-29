@@ -3,7 +3,7 @@ package wah.infrastructure.extend;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapExtensions {
+public class MapExtend {
 
 	public static Map<String, Object> StringUrlParamToMap(String urlParam) {
 		Map<String, Object> hashMap = new HashMap<String, Object>();

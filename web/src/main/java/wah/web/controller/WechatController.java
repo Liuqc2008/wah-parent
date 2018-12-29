@@ -1,6 +1,6 @@
 package wah.web.controller;
 
-import java.net.URLEncoder;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,67 +10,55 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import me.chanjar.weixin.common.api.WxConsts;
-import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
-import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import com.alibaba.fastjson.JSON;
+
 import wah.web.service.WechatService;
 
 @Controller
 @RequestMapping("Wechat")
 public class WechatController {
-
-    @Autowired
-    protected WxMpService wxMpService;
 	
     @Autowired
     protected WechatService wechatService;
     
-    @RequestMapping(value = "View")
-    public String View() {
-    	
-    	
-    	return "";
-    }
-    
     @RequestMapping(value = "Login")
     public String Login() throws Exception
     {
-    	String returnUrl = URLEncoder.encode("http://khvyti.natappfree.cc/web/Wechat/getOAuth2UserInfo", "UTF-8");
-        String redirectUrl=  wxMpService.oauth2buildAuthorizationUrl(returnUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
-        
-        System.out.println(redirectUrl);
-        return "redirect:" + redirectUrl;
+    	String returnUrl = "http://khvyti.natappfree.cc/web/Wechat/getOAuth2UserInfo";
+    		
+        return "redirect:" + wechatService.OauthUrl(returnUrl, null);
     }
     
-    /* 通过Code获取用户信息
+    /* 
+     * 通过Code获取用户信息
      * @param code code
      * @param lang zh_CN, zh_TW, en
      * @throws Exception 
+     * 用户信息{"city":"","country":"冰岛","groupId":0,"headImgUrl":"http://thirdwx.qlogo.cn/mmopen/F5pYbOced8eD0OvfnRWsflGJu5QALJslfujcg8fsuUIuSykXf42AzIzKia7CmRVN7HG4UUUcVoUM5FFgicluibMoAY9p6COFjAC/132","language":"zh_CN","nickname":"x","openId":"oOaWMty6ZXxCEr967bKp9NUH5hSU","province":"","qrScene":"0","qrSceneStr":"","remark":"","sex":1,"sexDesc":"男","subscribe":true,"subscribeScene":"ADD_SCENE_QR_CODE","subscribeTime":1533880823,"tagIds":[]}
      */
     @RequestMapping(value = "/getOAuth2UserInfo")
     public String getOAuth2UserInfo(@RequestParam(value = "code") String code, 
-    							    @RequestParam(value = "lang") String lang,
+    							    @RequestParam(value = "state") String state,
     							    Model model) throws Exception {
-        WxMpOAuth2AccessToken accessToken = wxMpService.oauth2getAccessToken(code);;
-        
-        WxMpUser wxMpUser = wxMpService.getUserService().userInfo(accessToken.getOpenId(), lang);;
-      
-        model.addAttribute("country", wxMpUser.getCountry());
-		model.addAttribute("province", wxMpUser.getProvince());
-		model.addAttribute("city", wxMpUser.getCity());
-		model.addAttribute("sex", wxMpUser.getSex());
-		model.addAttribute("nickname", wxMpUser.getNickname());
-		model.addAttribute("headimgurl", wxMpUser.getHeadImgUrl());
-		model.addAttribute("language", wxMpUser.getLanguage());
-		model.addAttribute("openid", wxMpUser.getOpenId());
-		model.addAttribute("privilege", wxMpUser.getPrivileges());
+    	
+        Map userinfo = (Map)JSON.parseObject(wechatService.GetUserInfoByCode(code, state));
+    
+        model.addAttribute("country", userinfo.get("country"));
+		model.addAttribute("province", userinfo.get("province"));
+		model.addAttribute("city", userinfo.get("city"));
+		model.addAttribute("sex", userinfo.get("sex"));
+		model.addAttribute("nickname", userinfo.get("nickname"));
+		model.addAttribute("headimgurl", userinfo.get("headImgUrl"));
+		model.addAttribute("language", userinfo.get("language"));
+		model.addAttribute("openid", userinfo.get("openid"));
 		
+		System.out.println(userinfo.get("headimgurl"));
 		return "jsp/Wechat/OAuth2UserInfo";
     }
     
     /*
      * 发送微信模板消息
+     * http://localhost/web/Wechat/SendTemplateMessage
      * */
     @RequestMapping(value="SendTemplateMessage", method= RequestMethod.GET)
 	@ResponseBody

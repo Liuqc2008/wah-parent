@@ -18,7 +18,7 @@ import wah.web.service.CommonService;
 import wah.web.service.RoleService;
 
 import wah.infrastructure.common.PageData;
-import wah.infrastructure.extend.MapExtensions;
+import wah.infrastructure.extend.MapExtend;
 
 @Controller
 @RequestMapping("Common")
@@ -46,7 +46,7 @@ public class CommonController {
 	public Object GetPageData(HttpServletRequest request) throws Exception {	
 		
 		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
-		Map<String, Object> requestParam = MapExtensions.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
+		Map<String, Object> requestParam = MapExtend.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
 		return commonService.GetPageData(requestParam);
 	}
@@ -58,7 +58,7 @@ public class CommonController {
 		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
 		PageData pageData = new PageData();
 
-		Map<String, Object> requestParam = MapExtensions.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
+		Map<String, Object> requestParam = MapExtend.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
 		pageData.setData(accountService.list(requestParam));
 		pageData.setCount(accountService.count(requestParam));
@@ -72,7 +72,7 @@ public class CommonController {
 		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
 		PageData pageData = new PageData();
 
-		Map<String, Object> requestParam = MapExtensions.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
+		Map<String, Object> requestParam = MapExtend.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
 		pageData.setData(roleService.list(requestParam));
 		pageData.setCount(roleService.count(requestParam));
