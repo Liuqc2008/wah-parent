@@ -18,6 +18,7 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="wah.web.service" />
+	<context:component-scan base-package="wah.web.config" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -38,8 +39,7 @@
 	</bean>
 
 
-	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="typeAliasesPackage" value="wah.web.pojo" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations"
@@ -61,6 +61,6 @@
 		<property name="basePackage" value="wah.web.mapper" />
 	</bean>
 
-	 <util:properties id="wxProperties" location="classpath:/wx.properties"/>
+ 	<util:properties id="wxProperties" location="classpath:/wx.properties"/>
 
 </beans>
