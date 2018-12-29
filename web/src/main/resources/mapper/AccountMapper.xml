@@ -97,10 +97,6 @@
 		#{createDate,jdbcType=TIMESTAMP})
 	</insert>
 
-	<delete id="delete" parameterType="java.lang.Integer">
-		delete from account where id = #{id,jdbcType=INTEGER}
-	</delete>
-
 	<update id="update" parameterType="wah.web.pojo.Account">
 		update account
 		<set>
@@ -116,4 +112,8 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from account where id = #{id,jdbcType=INTEGER}
+	</delete>
 </mapper>
