@@ -12,19 +12,19 @@
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  	<script type="text/javascript" src="/MavenSSM/Resource/Script/jquery-3.3.1.min.js"></script>
-  	<script type="text/javascript" src="/MavenSSM/Resource/Script/layui/layui.js"></script>
-	<link href="/MavenSSM/Resource/Script/layui/css/layui.css" rel="stylesheet" type="text/css" />
+  	<script type="text/javascript" src="/web/Resource/Script/jquery-3.3.1.min.js"></script>
+  	<script type="text/javascript" src="/web/Resource/Script/layui/layui.js"></script>
+	<link href="/web/Resource/Script/layui/css/layui.css" rel="stylesheet" type="text/css" />
 	
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
 	
 	<script>
 		wx.config({
 		    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-		    appId: "wx1d02f3d1411a96e3", // 必填，公众号的唯一标识
-		    timestamp: "${sign['timestamp']}", 	// 必填，生成签名的时间戳
-		    nonceStr: "${sign['nonceStr']}", // 必填，生成签名的随机串
-		    signature: "${sign['signature']}",// 必填，签名
+		    appId: "${configData['appId']}", // 必填，公众号的唯一标识
+		    timestamp: "${configData['timestamp']}", 	// 必填，生成签名的时间戳
+		    nonceStr: "${configData['nonceStr']}", // 必填，生成签名的随机串
+		    signature: "${configData['signature']}",// 必填，签名
 		    jsApiList: ['onMenuShareAppMessage',
 		                'onMenuShareTimeline',
 		                'chooseImage',
@@ -114,7 +114,7 @@
   	<button type="button" onclick="ScanQRCode()">扫一扫</button>
   	<button type="button" onclick="NavigateTo()">跳转小程序</button>
   	<br/>
-  	<img src="/MavenSSM/Resource/Themes/Image/201808101600.png"/>
+  	<img src="/web/Resource/Themes/Image/201808101600.png"/>
 </body>
 </html>
 

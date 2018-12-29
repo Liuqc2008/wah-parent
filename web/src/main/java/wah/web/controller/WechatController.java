@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
+import me.chanjar.weixin.mp.api.WxMpService;
 import wah.web.service.WechatService;
 
 @Controller
@@ -20,6 +21,9 @@ public class WechatController {
 	
     @Autowired
     protected WechatService wechatService;
+    
+    @Autowired
+    protected WxMpService wxMpService;
     
     @RequestMapping(value = "Login")
     public String Login() throws Exception
@@ -65,4 +69,29 @@ public class WechatController {
 	public void SendTemplateMessage() throws Exception{
     	wechatService.SendTemplateMessage();
 	}
+    
+    @RequestMapping(value="getJsapiTicket", method= RequestMethod.GET)
+	@ResponseBody
+    public String getJsapiTicket() throws Exception{
+    	
+    	return wxMpService.getJsapiTicket();
+	}
+    
+    @RequestMapping("jssdk")
+	public String jssdk(Model model) throws Exception{
+    	
+		model.addAttribute("configData", wxMpService.createJsapiSignature("http://khvyti.natappfree.cc/web/Wechat/jssdk"));
+
+		return "jsp/Wechat/jssdk";
+	}
+    
+    /*
+     * 获取Config参数：{"appId":"wx1d02f3d1411a96e3","nonceStr":"FFHrYFdY8JydytuN","timestamp":1546070645,"url":"http://khvyti.natappfree.cc","signature":"43dbaee40af544d8e4866fc5d35ad04d58590311"}
+     * */
+    @RequestMapping(value="createJsapiSignature", method= RequestMethod.GET)
+   	@ResponseBody
+   	public Object createJsapiSignature() throws Exception {
+       	
+       	return wxMpService.createJsapiSignature("http://khvyti.natappfree.cc");
+   	}
 }
