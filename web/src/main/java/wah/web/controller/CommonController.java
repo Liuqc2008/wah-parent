@@ -1,8 +1,6 @@
 package wah.web.controller;
 
 import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +18,7 @@ import wah.web.service.CommonService;
 import wah.web.service.RoleService;
 
 import wah.infrastructure.common.PageData;
+import wah.infrastructure.extend.MapExtensions;
 
 @Controller
 @RequestMapping("Common")
@@ -45,8 +44,9 @@ public class CommonController {
 	@RequestMapping("/GetPageData")
 	@ResponseBody
 	public Object GetPageData(HttpServletRequest request) throws Exception {	
+		
 		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
-		Map<String, Object> requestParam = urlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
+		Map<String, Object> requestParam = MapExtensions.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
 		return commonService.GetPageData(requestParam);
 	}
@@ -58,7 +58,7 @@ public class CommonController {
 		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
 		PageData pageData = new PageData();
 
-		Map<String, Object> requestParam = urlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
+		Map<String, Object> requestParam = MapExtensions.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
 		pageData.setData(accountService.list(requestParam));
 		pageData.setCount(accountService.count(requestParam));
@@ -72,31 +72,10 @@ public class CommonController {
 		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
 		PageData pageData = new PageData();
 
-		Map<String, Object> requestParam = urlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
+		Map<String, Object> requestParam = MapExtensions.StringUrlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
 		pageData.setData(roleService.list(requestParam));
 		pageData.setCount(roleService.count(requestParam));
 		return pageData;
-	}
-
-	public Map<String, Object> urlParamToMap(String urlParam) {
-		Map<String, Object> hashMap = new HashMap<String, Object>();
-		String[] param = urlParam.split("&");
-
-		for (String keyvalue : param) {
-			String[] pair = keyvalue.split("=");
-
-			if (pair.length == 2) {
-				if (pair[0].indexOf("key") >= 0)
-					pair[0] = pair[0].replace("key[", "").replace("]", "");
-
-				if (pair[0].equals("page") || pair[0].equals("limit"))
-					hashMap.put(pair[0], Integer.parseInt(pair[1]));
-				else
-					hashMap.put(pair[0], pair[1]);
-			}
-		}
-
-		return hashMap;
 	}
 }
