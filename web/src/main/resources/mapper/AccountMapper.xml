@@ -10,10 +10,13 @@
 				count(account.id) as totalNum
 			</when>
 			<otherwise>
-				account.*,
+				account.id,
+				account.`name`,
+				account.`password`,
+				date_format(account.createDate, '%Y-%c-%d %H:%i:%s' ) as createDate,
 				role.id as roleid,
-				role.name as rolename,
-				role.desc as roledesc,
+				role.`name` as rolename,
+				role.`desc` as roledesc,
 				role.createDate as rolecreateDate
 			</otherwise>
 		</choose>
