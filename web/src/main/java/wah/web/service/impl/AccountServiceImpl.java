@@ -13,13 +13,13 @@ import wah.web.mapper.AccountMapper;
 import wah.web.pojo.Account;
 import wah.web.service.AccountService;
 
-@Service
+@Service("AccountService")
 public class AccountServiceImpl implements AccountService {
 	@Autowired
 	AccountMapper accountMapper;
 
-	public List<Map<String, Object>> GetAccountRole(Map<String, Object> map){
-		return accountMapper.GetAccountRole(map);
+	public List<Map<String, Object>> GetAccountRoleList(Map<String, Object> map){
+		return accountMapper.GetAccountRoleList(map);
 	}
 	
 	public List<Account> list(Map<String, Object> map) {

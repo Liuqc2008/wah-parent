@@ -12,7 +12,7 @@ import wah.web.service.AliyunService;
 
 import wah.apiclient.aliyun.message.MessageApi;
 
-@Service
+@Service("AliyunService")
 public class AliyunServiceImpl implements AliyunService{
 	
 	public void sendMessage(String phone) throws Exception{

@@ -10,7 +10,7 @@ import wah.web.mapper.CategoryMapper;
 import wah.web.pojo.Category;
 import wah.web.service.CategoryService;
 
-@Service
+@Service("CategoryService")
 public class CategoryServiceImpl  implements CategoryService{
 	@Autowired
 	CategoryMapper categoryMapper;

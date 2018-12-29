@@ -10,7 +10,7 @@ import wah.web.service.PaymentService;
 import wah.apiclient.alipay.page.pay.AliPagePayApi;
 import wah.infrastructure.exception.AlertException;
 
-@Service
+@Service("PaymentService")
 public class PaymentServiceImpl implements PaymentService {
 
 	public String aliPagePay(Map<String, String> param) throws Exception {

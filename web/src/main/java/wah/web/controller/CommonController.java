@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import wah.web.service.AccountService;
 import wah.web.service.CategoryService;
+import wah.web.service.CommonService;
 import wah.web.service.RoleService;
 
 import wah.infrastructure.common.PageData;
@@ -31,6 +32,9 @@ public class CommonController {
 
 	@Autowired
 	RoleService roleService;
+	
+	@Autowired
+	CommonService commonService;
 
 	@RequestMapping("/CategoryList")
 	@ResponseBody
@@ -38,26 +42,15 @@ public class CommonController {
 		return categoryService.GetList();
 	}
 	
-	@RequestMapping("/AccountRoleList")
+	@RequestMapping("/GetPageData")
 	@ResponseBody
-	public Object AccountRoleList(@RequestParam(defaultValue = "0") int page, 
-								  @RequestParam(defaultValue = "0") int limit,
-						  		  HttpServletRequest request) throws Exception {
+	public Object GetPageData(HttpServletRequest request) throws Exception {	
 		String urlParam = request.getQueryString() == null ? "" : request.getQueryString();
-		PageData pageData = new PageData();
-
 		Map<String, Object> requestParam = urlParamToMap(URLDecoder.decode(urlParam, "UTF-8"));
 
-		pageData.setData(accountService.GetAccountRole(requestParam));
-		
-		requestParam.put("count", true);
-		requestParam.remove("page");
-		Map<String, Object> listCount =  accountService.GetAccountRole(requestParam).get(0);
-		pageData.setCount(Integer.parseInt(listCount.get("totalNum").toString()));
-		
-		return pageData;
+		return commonService.GetPageData(requestParam);
 	}
-
+	
 	@RequestMapping(value = "/AccountList", method = RequestMethod.GET)
 	@ResponseBody
 	public Object AccountList(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "0") int limit,

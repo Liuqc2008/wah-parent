@@ -7,7 +7,7 @@ import wah.web.pojo.Account;
 
 public interface AccountService {
 	
-	public List<Map<String, Object>> GetAccountRole(Map<String, Object> map);
+	public List<Map<String, Object>> GetAccountRoleList(Map<String, Object> map);
 
 	public List<Account> list(Map<String, Object> map);
 

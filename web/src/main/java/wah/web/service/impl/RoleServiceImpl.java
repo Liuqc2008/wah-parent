@@ -10,7 +10,7 @@ import wah.web.mapper.RoleMapper;
 import wah.web.pojo.Role;
 import wah.web.service.RoleService;
 
-@Service
+@Service("RoleService")
 public class RoleServiceImpl implements RoleService {
 	@Autowired
 	RoleMapper roleMapper;

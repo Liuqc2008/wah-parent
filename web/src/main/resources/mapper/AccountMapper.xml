@@ -3,7 +3,7 @@
 
 <mapper namespace="wah.web.mapper.AccountMapper">
 
-	<select id="GetAccountRole" parameterType="Map" resultType="java.util.HashMap">
+	<select id="GetAccountRoleList" parameterType="Map" resultType="java.util.HashMap">
 		select
 		<choose>
 			<when test="count !=null and count !='' ">
@@ -23,15 +23,13 @@
 		join role on role.id = accountrole.roleid
 		<where>
 			<if test="name !=null and name !='' ">
-				and name like CONCAT('%',#{name},'%')
+				and account.name like CONCAT('%',#{name},'%')
 			</if>
 			<if test="startTime !=null and startTime !='' ">
-				and createDate <![CDATA[ >= ]]>
-				#{startTime}
+				and account.createDate <![CDATA[ >= ]]> #{startTime}
 			</if>
 			<if test="endTime !=null and endTime !='' ">
-				and createDate <![CDATA[ <= ]]>
-				#{endTime}
+				and account.createDate <![CDATA[ <= ]]> #{endTime}
 			</if>
 			<if test="rolename !=null and rolename !='' ">
 				and role.name = #{rolename}
