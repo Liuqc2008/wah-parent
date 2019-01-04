@@ -57,8 +57,7 @@ public class AccountServiceImpl implements AccountService {
 		accountMapper.add(a1);
 
 		Account a2 = new Account();
-		a2.setName(
-				"TransactiTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionon");
+		a2.setName("TransactiTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionon");
 		a2.setPassword("");
 		a2.setCreateDate(new Date());
 		accountMapper.add(a2);
