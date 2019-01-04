@@ -23,6 +23,7 @@
   	-->
 </head>
 <body>
+	<div style="height:20px;"></div>
 	<div class="layui-form">
 		<div class="layui-form-item ">
 	        <label class="layui-form-label">用户名：</label>
@@ -34,6 +35,16 @@
 	        <label class="layui-form-label">密码：</label>
 	        <div class="layui-input-inline">
 	            <input type="text" id="Password" Value="${account.password}" lay-verify="required" lay-verType="tips" autocomplete="off" class="layui-input">
+	        </div>
+	    </div>
+	    <div class="layui-form-item ">
+	        <label class="layui-form-label">状态：</label>
+	        <div class="layui-input-inline">
+	        	<select name="State" id="State" lay-filter="aihao">
+			        <option value=""></option>
+			        <option value="Disabled">禁用</option>
+			        <option value="Enabled" selected="">启用</option>
+			 	</select>
 	        </div>
 	    </div>
 	    <div class="layui-form-item">
@@ -59,6 +70,7 @@
                     Id: id,
                     Name: $("#Name").val(),
                     Password: $("#Password").val(),
+                    State: $("#State option:selected").val(),
                 };
 	       		//alert(JSON.stringify(params));
 	        	

@@ -24,6 +24,7 @@ CREATE TABLE `account` (
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL DEFAULT '',
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `state` tinyint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 

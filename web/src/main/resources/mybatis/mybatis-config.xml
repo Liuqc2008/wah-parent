@@ -6,4 +6,7 @@
     <settings>
         <setting name="logImpl" value="LOG4J"/>
     </settings>
+	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="wah.web.pojo.enums.State"/>
+	</typeHandlers>
 </configuration>

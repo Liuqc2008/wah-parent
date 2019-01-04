@@ -5,11 +5,14 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import wah.web.pojo.enums.State;
+
 public class Account {
 	private Integer id;
 	private String name;
 	private String password;
 	private Date createDate;
+	private State state; 
 
 	private List<Role> roles;
 
@@ -44,6 +47,14 @@ public class Account {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 
 	public List<Role> getRoles() {

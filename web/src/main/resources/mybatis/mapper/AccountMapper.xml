@@ -45,7 +45,7 @@
 	</select>
 
 	<select id="list" parameterType="Map" resultType="Account">
-		select id, name, password, createDate
+		select id, name, password, state, createDate
 		from account
 		<where>
 			<if test="name !=null and name !='' ">
@@ -60,13 +60,13 @@
 				#{endTime}
 			</if>
 		</where>
+		order by createDate desc
 		<if test="page !=null and page !='' ">
 			limit ${(page -1) * limit}, ${limit}
 		</if>
 	</select>
 
-	<select id="count" parameterType="Map"
-		resultType="java.lang.Integer">
+	<select id="count" parameterType="Map" resultType="java.lang.Integer">
 		select count(id) from account
 		<where>
 			<if test="name !=null and name !='' ">
@@ -76,12 +76,10 @@
 				and password = #{password}
 			</if>
 			<if test="startTime !=null and startTime !='' ">
-				and createDate <![CDATA[ >= ]]>
-				#{startTime}
+				and createDate <![CDATA[ >= ]]> #{startTime}
 			</if>
 			<if test="endTime !=null and endTime !='' ">
-				and createDate <![CDATA[ <= ]]>
-				#{endTime}
+				and createDate <![CDATA[ <= ]]> #{endTime}
 			</if>
 		</where>
 	</select>
@@ -92,9 +90,9 @@
 
 	<insert id="add" keyColumn="id" keyProperty="id"
 		parameterType="wah.web.pojo.Account" useGeneratedKeys="true">
-		insert into account(name, password, createDate)
-		values(#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-		#{createDate,jdbcType=TIMESTAMP})
+		insert into account(name, password, state, createDate)
+			values(#{name, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR},
+				   #{state, jdbcType=TINYINT}, #{createDate, jdbcType=TIMESTAMP})
 	</insert>
 
 	<update id="update" parameterType="wah.web.pojo.Account">
@@ -105,6 +103,9 @@
 			</if>
 			<if test="password != null">
 				password = #{password, jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state, jdbcType=TINYINT},
 			</if>
 			<if test="createDate != null">
 				createDate = #{createDate, jdbcType=TIMESTAMP},

@@ -81,8 +81,9 @@
                 {field:'right', title: '操作', width: 130, toolbar: "#barDemo", align: 'center' },
 	      		{field:'id', width:80, title: 'Id', align: 'center', sort: true},
 	      		{field:'name', width:130, align: 'center', title: '用户名'},
-	      		{field:'password', width:130, align: 'center', title: '密码'},
-	      		{field:'createDate', width:180, align: 'center', title: '时间'},
+	      		{field:'password', width:180, align: 'center', title: '密码'},
+	      		{field:'state', width:90, align: 'center', title: '状态'},
+	      		{field:'createDate', width:180, align: 'center', title: '创建时间'},
 	    	]],
 	    	id: 'testReload',
 	    	page: true,
@@ -104,7 +105,7 @@
 
                 });
             } else if (obj.event === 'edit') {
-            	OpenFrame("修改用户信息", "/web/Account/AccountDetail?id=" + data.id, 460, 250, '', Reload);
+            	OpenFrame("修改用户信息", "/web/Account/AccountDetail?id=" + data.id, 460, 300, '', Reload);
             }
         });
         
@@ -124,7 +125,7 @@
 			   	layer.msg(checkStatus.isAll ? '全选': '未全选')
 			},
 			Add: function () {
-	         	OpenFrame("新增用户", "/web/Account/AccountDetail", 460, 250, '', Reload);
+	         	OpenFrame("新增用户", "/web/Account/AccountDetail", 460, 300, '', Reload);
 	        },	
   			reload: function(){
  			 	table.reload('testReload', {
