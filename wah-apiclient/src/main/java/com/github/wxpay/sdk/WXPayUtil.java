@@ -1,8 +1,8 @@
 package com.github.wxpay.sdk;
 
 import com.github.wxpay.sdk.WXPayConstants.SignType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -57,7 +57,7 @@ public class WXPayUtil {
             }
             return data;
         } catch (Exception ex) {
-            WXPayUtil.getLogger().warn("Invalid XML, can not convert to map. Error message: {}. XML content: {}", ex.getMessage(), strXML);
+            WXPayUtil.getLogger().info(String.format("Invalid XML, can not convert to map. Error message: %s. XML content: %s", ex.getMessage(), strXML));
             throw ex;
         }
 
@@ -272,7 +272,7 @@ public class WXPayUtil {
      * @return
      */
     public static Logger getLogger() {
-        Logger logger = LoggerFactory.getLogger("wxpay java sdk");
+        Logger logger = Logger.getLogger("wxpay java sdk");
         return logger;
     }
 
