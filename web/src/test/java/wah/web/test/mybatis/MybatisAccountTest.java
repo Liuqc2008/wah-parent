@@ -36,7 +36,7 @@ public class MybatisAccountTest {
 		}
 	}
 	
-	//@Ignore
+	@Ignore
 	@Test
 	public void testGetById() {
 		Account account = accountMapper.get(84);
