@@ -22,8 +22,8 @@ public class MybatisAccountTest {
 	private AccountMapper accountMapper;
 	
 	@Autowired
-	
 	private AccountService accountService;
+	
 	@Ignore
 	@Test
 	public void testAccountList() {
@@ -36,7 +36,7 @@ public class MybatisAccountTest {
 		}
 	}
 	
-	@Ignore
+	//@Ignore
 	@Test
 	public void testGetById() {
 		Account account = accountMapper.get(84);

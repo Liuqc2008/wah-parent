@@ -9,9 +9,7 @@ public class StringTest {
 	@Ignore
 	@Test
 	public void test() {
-		String dd = " dds s ";
-		
-		System.out.println(StringUtils.trim(dd));
+		System.out.println(" dds s ");
 	}
 
 }
