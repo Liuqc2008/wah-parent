@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,6 +22,7 @@ public class CacheTest {
 	
 	@Resource(name="sqlSession")
 	private SqlSessionFactory sqlSessionFactory;
+	
 	
 	@Before
 	public void init() {
@@ -63,5 +65,17 @@ public class CacheTest {
 		System.err.println("------------------第二次查询---------------------");
 		Account account1 = accountMapper.get(84);
 		System.out.println(account1);
+	}
+	
+	@Ignore
+	@Test
+	public void AccountGetByIdTest() {
+		/*System.err.println("------------------第一次查询---------------------");
+		Account account = accountMapper.get(84);
+		System.out.println(account);
+		
+		System.err.println("------------------第二次查询---------------------");
+		Account account1 = accountMapper.get(84);
+		System.out.println(account1);*/
 	}
 }

@@ -3,8 +3,20 @@ package wah.web.mapper;
 import java.util.List;
 import java.util.Map;
 
-import wah.web.pojo.Account;
+import org.apache.ibatis.annotations.CacheNamespace;
+import org.apache.ibatis.cache.Cache;
+import org.apache.ibatis.cache.decorators.FifoCache;
 
+import com.alibaba.druid.pool.PreparedStatementPool.LRUCache;
+
+import wah.web.pojo.Account;
+/*
+@CacheNamespace(
+			eviction = FifoCache.class,
+			flushInterval = 60000,
+			size=512,
+			readWrite = false
+		)*/
 public interface AccountMapper {
 	
 	public List<Map<String,Object>> GetAccountRoleList(Map<String, Object> map);
