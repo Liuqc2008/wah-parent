@@ -31,10 +31,27 @@ public class CacheTest {
 	public void destroy(){
 		System.err.println("destroy");
 	}
+	
+	@Ignore
+	@Test
+	public void GetTwiceSession() {
+		System.err.println("------------------第一次查询---------------------");
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		AccountMapper accountMapper = sqlSession.getMapper(AccountMapper.class);
+		Account account = accountMapper.get(84);
+		System.out.println(account);
+		
+		System.err.println("------------------第二次查询---------------------");
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		AccountMapper accountMapper1 = sqlSession1.getMapper(AccountMapper.class);
+		Account account1 = accountMapper1.get(84);
+		System.out.println(account1);
+	}
 
 	@Ignore
 	@Test
 	public void GetSqlSession() {
+		//xml文件中加入   flushCache="true" 去掉一级缓存功能 
 		//一级缓存测试
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		AccountMapper accountMapper = sqlSession.getMapper(AccountMapper.class);
