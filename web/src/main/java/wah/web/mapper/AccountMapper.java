@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.CacheNamespace;
-import org.apache.ibatis.cache.Cache;
-import org.apache.ibatis.cache.decorators.FifoCache;
 
-import com.alibaba.druid.pool.PreparedStatementPool.LRUCache;
+import org.apache.ibatis.cache.decorators.FifoCache;
 
 import wah.web.pojo.Account;
 /*
