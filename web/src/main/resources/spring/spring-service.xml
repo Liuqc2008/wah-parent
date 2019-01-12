@@ -25,6 +25,6 @@
 	<context:component-scan base-package="wah.web.service" />
 	<context:component-scan base-package="wah.web.config" />
 	
-	<util:properties id="wxProperties" location="classpath:/wx.properties" />
+	<util:properties id="wxProperties" location="classpath:properties/wx.properties" />
 	
 </beans>
