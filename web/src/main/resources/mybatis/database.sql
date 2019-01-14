@@ -164,3 +164,12 @@ INSERT INTO `systemlog` VALUES ('3', 'System', '系统错误：/ by zero', '2018-10-1
 INSERT INTO `systemlog` VALUES ('4', 'Alert', 'AlertException', '2018-10-12 16:28:37');
 INSERT INTO `systemlog` VALUES ('5', 'System', '系统错误：\r\n### Error updating database.  Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column \'name\' at row 1\r\n### The error may involve com.how2java.mapper.AccountMapper.add-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into account(name, password, createDate)      values(?, ?, ?)\r\n### Cause: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column \'name\' at row 1\n; SQL []; Data truncation: Data too long for column \'name\' at row 1; nested exception is com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column \'name\' at row 1', '2018-10-12 16:49:42');
 
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wah.web.mapper.UserMapper">
+
+	<select id="getList" parameterType="Map" resultType="User">
+		select  user.id,
+				user.`name`,
+				user.`password`,
+				user.createDate
+		from user
+		<where>
+			<if test="name !=null and name !='' ">
+				and `name` like CONCAT('%',#{name},'%')
+			</if>
+			<if test="startTime !=null and startTime !='' ">
+				and createDate <![CDATA[ >= ]]> #{startTime}
+			</if>
+			<if test="endTime !=null and endTime !='' ">
+				and createDate <![CDATA[ <= ]]> #{endTime}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="_int" resultType="User">
+		select * from user where id= #{id}
+	</select>
+
+	<insert id="add" keyColumn="id" keyProperty="id"
+		parameterType="User" useGeneratedKeys="true">
+		insert into user(name, password, createDate)
+			values(#{name, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR},
+				   #{createDate, jdbcType=TIMESTAMP})
+	</insert>
+	
+	
+	<insert id="addList" parameterType="java.util.List" useGeneratedKeys="true">
+		insert into user(name, password, createDate) values
+	 	<foreach collection="list" item="item" index="index" separator="," >
+		 	(#{item.name, jdbcType=VARCHAR}, #{item.password, jdbcType=VARCHAR},
+			 	#{item.createDate, jdbcType=TIMESTAMP})
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="User">
+		update user
+		<set>
+			<if test="name != null">
+				name = #{name, jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password, jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				createDate = #{createDate, jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from user where id = #{id,jdbcType=INTEGER}
+	</delete>
+</mapper>
