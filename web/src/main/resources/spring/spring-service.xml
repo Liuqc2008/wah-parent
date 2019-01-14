@@ -25,6 +25,10 @@
 	<context:component-scan base-package="wah.web.service" />
 	<context:component-scan base-package="wah.web.config" />
 	
+	<!-- AOP 注解方式 ；定义Aspect -->
+    <context:component-scan base-package="wah.web.aspect"/>
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+	
 	<util:properties id="wxProperties" location="classpath:properties/wx.properties" />
 	
 </beans>
