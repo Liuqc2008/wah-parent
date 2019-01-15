@@ -44,8 +44,10 @@ public class CommonServiceImpl implements CommonService {
 	
 	public static Map<String, String> ReportNameConfig(){
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("GetAccountRoleList", "AccountService");
-		map.put("GetUserPageList", "UserService");
+		map.put("getAccountRolePageList", "AccountService");
+		map.put("getAccountPageList", "AccountService");
+		map.put("getUserPageList", "UserService");
+		map.put("getRolePageList", "RoleService");
 
 		return map;
 	}

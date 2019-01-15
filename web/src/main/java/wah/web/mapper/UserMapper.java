@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface UserMapper extends BaseMapper<User>{
 
-    public List<Map<String, Object>> GetUserPageList(Map<String, Object> map);
+    public List<Map<String, Object>> getUserPageList(Map<String, Object> map);
 }

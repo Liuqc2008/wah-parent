@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wah.web.mapper.RoleMapper">
- 
+
+	<select id="getRolePageList" parameterType="Map" resultType="java.util.HashMap">
+		select
+		<choose>
+			<when test="count !=null and count !='' ">
+				count(role.id) as totalNum
+			</when>
+			<otherwise>
+				role.id,
+				role.`name`,
+				role.`desc`,
+				date_format(role.createDate, '%Y-%c-%d %H:%i:%s' ) as createDate
+			</otherwise>
+		</choose>
+		from role
+		<where>
+			<if test="name !=null and name !='' ">
+				and role.name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="startTime !=null and startTime !='' ">
+				and role.createDate <![CDATA[ >= ]]> #{startTime}
+			</if>
+			<if test="endTime !=null and endTime !='' ">
+				and role.createDate <![CDATA[ <= ]]> #{endTime}
+			</if>
+		</where>
+
+		<if test="page !=null and page !='' ">
+			limit ${(page -1) * limit}, ${limit}
+		</if>
+	</select>
+
  	<select id="list" parameterType="Map" resultType="Role">
 	   	select id, `name`, `desc`, createDate
 	   		from role
@@ -9,9 +40,6 @@
 	   		<if test="name !=null and name !='' ">
 				and name like CONCAT('%',#{name},'%') 
 			</if>
-        	<if test="desc !=null and desc !='' ">
-            	and password = #{password}
-        	</if>  	
         	<if test="startTime !=null and startTime !='' ">
             	and createDate <![CDATA[ >= ]]> #{startTime}
         	</if>

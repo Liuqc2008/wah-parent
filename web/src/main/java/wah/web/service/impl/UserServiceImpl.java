@@ -13,42 +13,42 @@ import wah.web.service.UserService;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	UserMapper userMapper;
+    @Autowired
+    UserMapper userMapper;
 
-	@Override
-	public List<Map<String, Object>> GetUserPageList(Map<String, Object> map){
-		return userMapper.GetUserPageList(map);
-	}
+    @Override
+    public List<Map<String, Object>> getUserPageList(Map<String, Object> map) {
+        return userMapper.getUserPageList(map);
+    }
 
-	@Override
-	public List<User> getList(Map<String, Object> map) {
-		return userMapper.getList(map);
-	}
+    @Override
+    public List<User> getList(Map<String, Object> map) {
+        return userMapper.getList(map);
+    }
 
-	@Override
-	public User getById(int id) {
-		return userMapper.getById(id);
-	}
+    @Override
+    public User getById(int id) {
+        return userMapper.getById(id);
+    }
 
-	@Override
-	public int add(User user) {
-		return userMapper.add(user);
-	}
+    @Override
+    public int add(User user) {
+        return userMapper.add(user);
+    }
 
-	@Override
-	public void addList(List<User> userList) {
-		userMapper.addList(userList);
-	}
+    @Override
+    public void addList(List<User> userList) {
+        userMapper.addList(userList);
+    }
 
-	@Override
-	public int update(User user) {
-		return userMapper.update(user);
-	}
+    @Override
+    public int update(User user) {
+        return userMapper.update(user);
+    }
 
-	@Override
-	public int delete(int id) {
-		return userMapper.delete(id);
-	}
+    @Override
+    public int delete(int id) {
+        return userMapper.delete(id);
+    }
 
 }

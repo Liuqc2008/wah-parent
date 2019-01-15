@@ -74,7 +74,7 @@
 	  
   		table.render({
 	    	elem: '#test',
-	    	url:'/web/Common/GetPageData?reportName=GetAccountRoleList',
+	    	url:'/web/Common/GetPageData?reportName=getAccountRolePageList',
 	    	cols: [[
 				//{type: 'numbers' },
 				{checkbox: true, fixed: 'left'},

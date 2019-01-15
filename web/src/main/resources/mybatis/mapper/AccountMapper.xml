@@ -3,7 +3,7 @@
 
 <mapper namespace="wah.web.mapper.AccountMapper">
 
-	<select id="GetAccountRoleList" parameterType="Map" resultType="java.util.HashMap">
+	<select id="getAccountRolePageList" parameterType="Map" resultType="java.util.HashMap">
 		select
 		<choose>
 			<when test="count !=null and count !='' ">
@@ -39,6 +39,39 @@
 			</if>
 		</where>
 		
+		<if test="page !=null and page !='' ">
+			limit ${(page -1) * limit}, ${limit}
+		</if>
+	</select>
+
+	<select id="getAccountPageList" parameterType="Map" resultType="java.util.HashMap">
+		select
+		<choose>
+			<when test="count !=null and count !='' ">
+				count(account.id) as totalNum
+			</when>
+			<otherwise>
+				account.id,
+				account.`name`,
+				account.`password`,
+				case when account.`state` = 1 then '启用'
+					 else '禁用' end as `state`,
+				date_format(account.createDate, '%Y-%c-%d %H:%i:%s' ) as createDate
+			</otherwise>
+		</choose>
+		from account
+		<where>
+			<if test="name !=null and name !='' ">
+				and account.name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="startTime !=null and startTime !='' ">
+				and account.createDate <![CDATA[ >= ]]> #{startTime}
+			</if>
+			<if test="endTime !=null and endTime !='' ">
+				and account.createDate <![CDATA[ <= ]]> #{endTime}
+			</if>
+		</where>
+
 		<if test="page !=null and page !='' ">
 			limit ${(page -1) * limit}, ${limit}
 		</if>

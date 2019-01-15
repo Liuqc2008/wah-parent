@@ -7,7 +7,7 @@ import wah.web.pojo.User;
 
 public interface UserService {
 
-	public List<Map<String, Object>> GetUserPageList(Map<String, Object> map);
+	public List<Map<String, Object>> getUserPageList(Map<String, Object> map);
 
 	public List<User> getList(Map<String, Object> map);
 

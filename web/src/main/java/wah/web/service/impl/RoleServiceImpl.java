@@ -15,6 +15,10 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	RoleMapper roleMapper;
 
+	public List<Map<String, Object>> getRolePageList(Map<String, Object> map){
+		return roleMapper.getRolePageList(map);
+	}
+
 	public List<Role> list(Map<String, Object> map) {
 		return roleMapper.list(map);
 	}

@@ -17,7 +17,9 @@ import wah.web.pojo.Account;
 		)*/
 public interface AccountMapper {
 	
-	public List<Map<String,Object>> GetAccountRoleList(Map<String, Object> map);
+	public List<Map<String,Object>> getAccountRolePageList(Map<String, Object> map);
+
+	public List<Map<String, Object>> getAccountPageList(Map<String, Object> map);
 	
 	public List<Account> list(Map<String, Object> map);
 

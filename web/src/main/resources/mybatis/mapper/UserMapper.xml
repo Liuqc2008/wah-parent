@@ -3,7 +3,7 @@
 
 <mapper namespace="wah.web.mapper.UserMapper">
 
-	<select id="GetUserPageList" parameterType="Map" resultType="java.util.HashMap">
+	<select id="getUserPageList" parameterType="Map" resultType="java.util.HashMap">
 		select
 		<choose>
 			<when test="count !=null and count !='' ">

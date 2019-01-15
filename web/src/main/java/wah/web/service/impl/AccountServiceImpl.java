@@ -15,52 +15,55 @@ import wah.web.service.AccountService;
 
 @Service("AccountService")
 public class AccountServiceImpl implements AccountService {
-	@Autowired
-	AccountMapper accountMapper;
+    @Autowired
+    AccountMapper accountMapper;
 
-	public List<Map<String, Object>> GetAccountRoleList(Map<String, Object> map){
-		return accountMapper.GetAccountRoleList(map);
-	}
-	
-	public List<Account> list(Map<String, Object> map) {
-		return accountMapper.list(map);
-	}
+    public List<Map<String, Object>> getAccountRolePageList(Map<String, Object> map) {
+        return accountMapper.getAccountRolePageList(map);
+    }
 
-	public int count(Map<String, Object> map) {
-		return accountMapper.count(map);
-	}
+    public List<Map<String, Object>> getAccountPageList(Map<String, Object> map){
+        return accountMapper.getAccountPageList(map);
+    }
 
-	public Account get(int id) {
-		return accountMapper.get(id);
-	}
+    public List<Account> list(Map<String, Object> map) {
+        return accountMapper.list(map);
+    }
 
-	public int add(Account account) {
+    public int count(Map<String, Object> map) {
+        return accountMapper.count(map);
+    }
 
-		account.setCreateDate(new Date());
-		return accountMapper.add(account);
-	}
+    public Account get(int id) {
+        return accountMapper.get(id);
+    }
 
-	public int update(Account account) {
-		return accountMapper.update(account);
-	}
+    public int add(Account account) {
+        account.setCreateDate(new Date());
+        return accountMapper.add(account);
+    }
 
-	public int delete(int id) {
-		return accountMapper.delete(id);
-	}
+    public int update(Account account) {
+        return accountMapper.update(account);
+    }
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackForClassName = "Exception")
-	public void transactionAdd() {
-		Account a1 = new Account();
-		a1.setName("Transaction");
-		a1.setPassword("");
-		a1.setCreateDate(new Date());
-		accountMapper.add(a1);
+    public int delete(int id) {
+        return accountMapper.delete(id);
+    }
 
-		Account a2 = new Account();
-		a2.setName("TransactiTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionon");
-		a2.setPassword("");
-		a2.setCreateDate(new Date());
-		accountMapper.add(a2);
+    @Transactional(propagation = Propagation.REQUIRED, rollbackForClassName = "Exception")
+    public void transactionAdd() {
+        Account a1 = new Account();
+        a1.setName("Transaction");
+        a1.setPassword("");
+        a1.setCreateDate(new Date());
+        accountMapper.add(a1);
 
-	}
+        Account a2 = new Account();
+        a2.setName("TransactiTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionTransactionon");
+        a2.setPassword("");
+        a2.setCreateDate(new Date());
+        accountMapper.add(a2);
+
+    }
 }
