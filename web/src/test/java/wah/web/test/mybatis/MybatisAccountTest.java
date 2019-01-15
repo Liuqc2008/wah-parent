@@ -16,7 +16,7 @@ import wah.web.pojo.Account;
 import wah.web.service.AccountService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring/applicationContext.xml")
+@ContextConfiguration("classpath:spring/spring-*.xml")
 public class MybatisAccountTest {
 	@Autowired
 	private AccountMapper accountMapper;
