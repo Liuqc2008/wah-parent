@@ -10,6 +10,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import wah.infrastructure.common.PageData;
+import wah.web.config.ApplicationContextProvider;
 import wah.web.service.CommonService;
 
 @Service("CommonService")
@@ -32,11 +33,11 @@ public class CommonServiceImpl implements CommonService {
 	 * */	
 	public static List<Map<String,Object>> GetServiceData(Map<String, Object> map)  throws Exception{
 		String serviceName = CommonServiceImpl.ReportNameConfig().get(map.get("reportName"));
-				
-		WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
+
 		Class<?> classType= Class.forName("wah.web.service." + serviceName);	//类名
 		Method method = classType.getDeclaredMethod(map.get("reportName").toString(), Map.class);	//方法名
-		List<Map<String,Object>> result = (List<Map<String, Object>>) method.invoke(wac.getBean(serviceName), map);	//@Service 注册名称
+		Object bean = ApplicationContextProvider.getBean(serviceName);
+		List<Map<String,Object>> result = (List<Map<String, Object>>) method.invoke(bean, map);	//@Service 注册名称
 		
 		return result;
 	}
@@ -44,7 +45,8 @@ public class CommonServiceImpl implements CommonService {
 	public static Map<String, String> ReportNameConfig(){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("GetAccountRoleList", "AccountService");
-		
+		map.put("GetUserPageList", "UserService");
+
 		return map;
 	}
 }

@@ -3,6 +3,37 @@
 
 <mapper namespace="wah.web.mapper.UserMapper">
 
+	<select id="GetUserPageList" parameterType="Map" resultType="java.util.HashMap">
+		select
+		<choose>
+			<when test="count !=null and count !='' ">
+				count(user.id) as totalNum
+			</when>
+			<otherwise>
+				user.id,
+				user.`name`,
+				user.`password`,
+				date_format(user.createDate, '%Y-%c-%d %H:%i:%s' ) as createDate
+			</otherwise>
+		</choose>
+		from user
+		<where>
+			<if test="name !=null and name !='' ">
+				and `name` like CONCAT('%',#{name},'%')
+			</if>
+			<if test="startTime !=null and startTime !='' ">
+				and createDate <![CDATA[ >= ]]> #{startTime}
+			</if>
+			<if test="endTime !=null and endTime !='' ">
+				and createDate <![CDATA[ <= ]]> #{endTime}
+			</if>
+		</where>
+
+		<if test="page !=null and page !='' ">
+			limit ${(page -1) * limit}, ${limit}
+		</if>
+	</select>
+
 	<select id="getList" parameterType="Map" resultType="User">
 		select  user.id,
 				user.`name`,
@@ -26,8 +57,7 @@
 		select * from user where id= #{id}
 	</select>
 
-	<insert id="add" keyColumn="id" keyProperty="id"
-		parameterType="User" useGeneratedKeys="true">
+	<insert id="add" keyColumn="id" keyProperty="id" parameterType="User" useGeneratedKeys="true">
 		insert into user(name, password, createDate)
 			values(#{name, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR},
 				   #{createDate, jdbcType=TIMESTAMP})

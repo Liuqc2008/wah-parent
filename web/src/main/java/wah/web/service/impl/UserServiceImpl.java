@@ -15,7 +15,12 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserMapper userMapper;
-	
+
+	@Override
+	public List<Map<String, Object>> GetUserPageList(Map<String, Object> map){
+		return userMapper.GetUserPageList(map);
+	}
+
 	@Override
 	public List<User> getList(Map<String, Object> map) {
 		return userMapper.getList(map);
