@@ -16,7 +16,7 @@ import wah.web.mapper.AccountMapper;
 import wah.web.pojo.Account;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/spring/applicationContext.xml")
+@ContextConfiguration("classpath:/spring/spring-*.xml")
 public class CacheTest {
 	
 	@Resource(name="sqlSession")
@@ -27,7 +27,7 @@ public class CacheTest {
 	public void init() {
 		System.out.println("init");
 	}
-	
+
 	@After
 	public void destroy(){
 		System.err.println("destroy");
